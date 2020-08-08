@@ -13,6 +13,9 @@ import com.github.javaparser.ParseException;
 import com.github.javaparser.ParseProblemException;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.Range;
+
 import JavaExtractor.Common.CommandLineValues;
 import JavaExtractor.Common.Common;
 import JavaExtractor.Common.MethodContent;
@@ -36,11 +39,11 @@ public class FeatureExtractor {
 		this.m_CommandLineValues = commandLineValues;
 	}
 
-	public ArrayList<ProgramFeatures> extractFeatures(String code) throws ParseException, IOException {
+	public ArrayList<ProgramFeatures> extractFeatures(String code, String range) throws ParseException, IOException {
 		CompilationUnit compilationUnit = parseFileWithRetries(code);
 		FunctionVisitor functionVisitor = new FunctionVisitor();
 
-		functionVisitor.visit(compilationUnit, null);
+		functionVisitor.visit(compilationUnit, range);
 
 		ArrayList<MethodContent> methods = functionVisitor.getMethodContents();
 		ArrayList<ProgramFeatures> programs = generatePathFeatures(methods);
@@ -96,7 +99,7 @@ public class FeatureExtractor {
 			for (int j = i + 1; j < functionLeaves.size(); j++) {
 				String separator = Common.EmptyString;
 
-				String path = generatePath(functionLeaves.get(i), functionLeaves.get(j), separator);
+				String path = generatePath(functionLeaves.get(i), functionLeaves.get(j), separator, methodContent.getRange());
 				if (path != Common.EmptyString) {
 					Property source = functionLeaves.get(i).getUserData(Common.PropertyKey);
 					Property target = functionLeaves.get(j).getUserData(Common.PropertyKey);
@@ -117,11 +120,17 @@ public class FeatureExtractor {
 		return upStack;
 	}
 
-	private String generatePath(Node source, Node target, String separator) {
+	private String Range2String(Range range) {
+		String range_s = String.format("%i,%i)-(%i,%i)", range.begin.line, range.begin.column, range.end.line, range.end.column);
+		return range_s;
+	}
+
+	private String generatePath(Node source, Node target, String separator, String range) {
 		String down = downSymbol;
 		String up = upSymbol;
 		String startSymbol = lparen;
 		String endSymbol = rparen;
+		String mutation = "";
 
 		StringJoiner stringBuilder = new StringJoiner(separator);
 		ArrayList<Node> sourceStack = getTreeStack(source);
@@ -158,8 +167,13 @@ public class FeatureExtractor {
 				childId = saturateChildId(currentNode.getUserData(Common.ChildId))
 						.toString();
 			}
-			stringBuilder.add(String.format("%s%s%s%s%s", startSymbol,
-					currentNode.getUserData(Common.PropertyKey).getType(), childId, endSymbol, up));
+			mutation = "";
+			// System.out.println(currentNode.getRange().toString());
+			// System.out.println(range);
+			if (currentNode.getRange().toString().equals(range))
+				mutation = "<PLACE>";
+			stringBuilder.add(String.format("%s%s%s%s%s%s", startSymbol,
+					currentNode.getUserData(Common.PropertyKey).getType(), childId, endSymbol, mutation, up));
 		}
 
 		Node commonNode = sourceStack.get(sourceStack.size() - commonPrefix);
@@ -173,8 +187,12 @@ public class FeatureExtractor {
 			commonNodeChildId = saturateChildId(commonNode.getUserData(Common.ChildId))
 					.toString();
 		}
-		stringBuilder.add(String.format("%s%s%s%s", startSymbol,
-				commonNode.getUserData(Common.PropertyKey).getType(), commonNodeChildId, endSymbol));
+		
+		mutation = "";
+		if (commonNode.getRange().toString().equals(range))
+			mutation = "<PLACE>";
+		stringBuilder.add(String.format("%s%s%s%s%s", startSymbol,
+				commonNode.getUserData(Common.PropertyKey).getType(), commonNodeChildId, endSymbol, mutation));
 
 		for (int i = targetStack.size() - commonPrefix - 1; i >= 0; i--) {
 			Node currentNode = targetStack.get(i);
@@ -183,8 +201,11 @@ public class FeatureExtractor {
 				childId = saturateChildId(currentNode.getUserData(Common.ChildId))
 						.toString();
 			}
-			stringBuilder.add(String.format("%s%s%s%s%s", down, startSymbol,
-					currentNode.getUserData(Common.PropertyKey).getType(), childId, endSymbol));
+			mutation = "";
+			if (currentNode.getRange().toString().equals(range))
+				mutation = "<PLACE>";
+			stringBuilder.add(String.format("%s%s%s%s%s%s", down, startSymbol,
+					currentNode.getUserData(Common.PropertyKey).getType(), childId, endSymbol, mutation));
 		}
 
 		return stringBuilder.toString();

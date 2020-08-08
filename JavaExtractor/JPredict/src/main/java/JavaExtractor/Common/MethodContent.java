@@ -6,11 +6,13 @@ import com.github.javaparser.ast.Node;
 public class MethodContent {
 	private ArrayList<Node> leaves;
 	private String name;
+	private String range;
 	private long length;
 
-	public MethodContent(ArrayList<Node> leaves, String name, long length) {
+	public MethodContent(ArrayList<Node> leaves, String name, String range, long length) {
 		this.leaves = leaves;
 		this.name = name;
+		this.range = range;
 		this.length = length;
 	}
 
@@ -20,6 +22,10 @@ public class MethodContent {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getRange() {
+		return range;
 	}
 
 	public long getLength() {

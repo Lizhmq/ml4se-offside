@@ -78,7 +78,7 @@ public class ExtractFeaturesTask implements Callable<Void> {
 		try {
 			FeatureExtractor featureExtractor = new FeatureExtractor(m_CommandLineValues);
 
-			features = featureExtractor.extractFeatures(code);
+			features = featureExtractor.extractFeatures(code, "");
 
 			String toPrint = featuresToString(features);
 			if (toPrint.length() > 0) {
@@ -101,17 +101,17 @@ public class ExtractFeaturesTask implements Callable<Void> {
 			for (MethodDeclaration method: methods) {
 				allMethods.addAll(methodMutator.processMethod(method));
 			}
-            updateCounters(allMethods);
+            		updateCounters(allMethods);
 
 			ArrayList<ProgramFeatures> allFeatures = new ArrayList<>();
 
 			for (ExtractedMethod extractedMethod: allMethods) {
-                ArrayList<ProgramFeatures> features = featureExtractor.extractFeatures(extractedMethod.getMethod().toString());
-                features.forEach(feature -> {
-                    feature.setName(extractedMethod.getContainingNode());
-                    feature.setOriginalOperator(extractedMethod.getOriginalOperator());
-                });
-                allFeatures.addAll(features);
+				ArrayList<ProgramFeatures> features = featureExtractor.extractFeatures(extractedMethod.getMethod().toString(), extractedMethod.getRange());
+				features.forEach(feature -> {
+					feature.setName(extractedMethod.getContainingNode());
+					feature.setOriginalOperator(extractedMethod.getOriginalOperator());
+				});
+				allFeatures.addAll(features);
 			}
 			return allFeatures;
 
@@ -129,7 +129,7 @@ public class ExtractFeaturesTask implements Callable<Void> {
 			List<MethodDeclaration> methods = methodExtractor.extractMethodsFromCode(code);
 			FeatureExtractor featureExtractor = new FeatureExtractor(m_CommandLineValues);
 
-			ArrayList<ProgramFeatures> features = featureExtractor.extractFeatures(methodDeclarationsToString(methods));
+			ArrayList<ProgramFeatures> features = featureExtractor.extractFeatures(methodDeclarationsToString(methods), "");
 			features.forEach(programFeatures -> programFeatures.setName(this.filePath.toString() + ":" + programFeatures.getName()));
 
 			return features;

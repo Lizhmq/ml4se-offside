@@ -1,0 +1,191 @@
+
+IFless void
+
+(VoidType0)^(MethodDeclaration)_(NameExpr1)
+
+METHOD_NAME void
+
+(VoidType0)^(MethodDeclaration)_(Parameter)_(VariableDeclaratorId0)
+
+args void
+
+(VoidType0)^(MethodDeclaration)_(Parameter)_(ClassOrInterfaceType1)
+
+string void
+
+(VoidType0)^(MethodDeclaration)_(Parameter)_(ArrayBracketPair2)
+
+[] METHOD_NAME
+
+(NameExpr1)^(MethodDeclaration)_(Parameter)_(VariableDeclaratorId0)
+
+args METHOD_NAME
+
+(NameExpr1)^(MethodDeclaration)_(Parameter)_(ClassOrInterfaceType1)
+
+string METHOD_NAME
+
+(NameExpr1)^(MethodDeclaration)_(Parameter)_(ArrayBracketPair2)
+
+[] METHOD_NAME
+
+(NameExpr1)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(BinaryExpr:less)_(IntegerLiteralExpr0)
+
+2 METHOD_NAME
+
+(NameExpr1)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(BinaryExpr:less)_(IntegerLiteralExpr1)
+
+3 METHOD_NAME
+
+(NameExpr1)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(FieldAccessExpr0)_(NameExpr0)
+
+system METHOD_NAME
+
+(NameExpr1)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(FieldAccessExpr0)_(NameExpr2)
+
+out METHOD_NAME
+
+(NameExpr1)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(StringLiteralExpr2)
+
+helloworld METHOD_NAME
+
+(NameExpr1)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(NameExpr3)
+
+println args
+
+(VariableDeclaratorId0)^(Parameter)_(ClassOrInterfaceType1)
+
+string args
+
+(VariableDeclaratorId0)^(Parameter)_(ArrayBracketPair2)
+
+[] args
+
+(VariableDeclaratorId0)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(BinaryExpr:less)_(IntegerLiteralExpr0)
+
+2 args
+
+(VariableDeclaratorId0)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(BinaryExpr:less)_(IntegerLiteralExpr1)
+
+3 args
+
+(VariableDeclaratorId0)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(FieldAccessExpr0)_(NameExpr0)
+
+system args
+
+(VariableDeclaratorId0)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(FieldAccessExpr0)_(NameExpr2)
+
+out args
+
+(VariableDeclaratorId0)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(StringLiteralExpr2)
+
+helloworld args
+
+(VariableDeclaratorId0)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(NameExpr3)
+
+println string
+
+(ClassOrInterfaceType1)^(Parameter)_(ArrayBracketPair2)
+
+[] string
+
+(ClassOrInterfaceType1)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(BinaryExpr:less)_(IntegerLiteralExpr0)
+
+2 string
+
+(ClassOrInterfaceType1)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(BinaryExpr:less)_(IntegerLiteralExpr1)
+
+3 string
+
+(ClassOrInterfaceType1)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(FieldAccessExpr0)_(NameExpr0)
+
+system string
+
+(ClassOrInterfaceType1)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(FieldAccessExpr0)_(NameExpr2)
+
+out string
+
+(ClassOrInterfaceType1)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(StringLiteralExpr2)
+
+helloworld string
+
+(ClassOrInterfaceType1)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(NameExpr3)
+
+println []
+
+(ArrayBracketPair2)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(BinaryExpr:less)_(IntegerLiteralExpr0)
+
+2 []
+
+(ArrayBracketPair2)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(BinaryExpr:less)_(IntegerLiteralExpr1)
+
+3 []
+
+(ArrayBracketPair2)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(FieldAccessExpr0)_(NameExpr0)
+
+system []
+
+(ArrayBracketPair2)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(FieldAccessExpr0)_(NameExpr2)
+
+out []
+
+(ArrayBracketPair2)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(StringLiteralExpr2)
+
+helloworld []
+
+(ArrayBracketPair2)^(Parameter)^(MethodDeclaration)_(BlockStmt)_(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(NameExpr3)
+
+println 2
+
+(IntegerLiteralExpr0)^(BinaryExpr:less)_(IntegerLiteralExpr1)
+
+3 2
+
+(IntegerLiteralExpr0)^(BinaryExpr:less)^(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(FieldAccessExpr0)_(NameExpr0)
+
+system 2
+
+(IntegerLiteralExpr0)^(BinaryExpr:less)^(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(FieldAccessExpr0)_(NameExpr2)
+
+out 2
+
+(IntegerLiteralExpr0)^(BinaryExpr:less)^(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(StringLiteralExpr2)
+
+helloworld 2
+
+(IntegerLiteralExpr0)^(BinaryExpr:less)^(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(NameExpr3)
+
+println 3
+
+(IntegerLiteralExpr1)^(BinaryExpr:less)^(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(FieldAccessExpr0)_(NameExpr0)
+
+system 3
+
+(IntegerLiteralExpr1)^(BinaryExpr:less)^(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(FieldAccessExpr0)_(NameExpr2)
+
+out 3
+
+(IntegerLiteralExpr1)^(BinaryExpr:less)^(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(StringLiteralExpr2)
+
+helloworld 3
+
+(IntegerLiteralExpr1)^(BinaryExpr:less)^(IfStmt)_(ExpressionStmt)_(MethodCallExpr0)_(NameExpr3)
+
+println system
+
+(NameExpr0)^(FieldAccessExpr0)_(NameExpr2)
+
+out system
+
+(NameExpr0)^(FieldAccessExpr0)^(MethodCallExpr)_(StringLiteralExpr2)
+
+helloworld out
+
+(NameExpr2)^(FieldAccessExpr0)^(MethodCallExpr)_(StringLiteralExpr2)
+
+helloworld helloworld
+
+(StringLiteralExpr2)^(MethodCallExpr)_(NameExpr3)
+
+println                                                                                                                                                         
+

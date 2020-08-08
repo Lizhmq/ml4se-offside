@@ -5,11 +5,13 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 public class ExtractedMethod {
     private MethodDeclaration method;
     private String originalOperator;
+    private String range;
     private String containingNode;
 
-    public ExtractedMethod(MethodDeclaration method, String originalOperator, String containingNode) {
+    public ExtractedMethod(MethodDeclaration method, String originalOperator, String range, String containingNode) {
         this.method = method;
         this.originalOperator = originalOperator;
+        this.range = range;
         this.containingNode = containingNode;
     }
 
@@ -27,6 +29,14 @@ public class ExtractedMethod {
 
     public void setOriginalOperator(String originalOperator) {
         this.originalOperator = originalOperator;
+    }
+
+    public String getRange() {
+        return range;
+    }
+
+    public void setRange(String range) {
+        this.range = range;
     }
 
     public String getContainingNode() {

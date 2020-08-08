@@ -3,6 +3,9 @@ package JavaExtractor.Common;
 import JavaExtractor.App;
 import JavaExtractor.Common.Statistics.ContainingNode;
 import JavaExtractor.FeaturesEntities.ExtractedMethod;
+
+import com.github.javaparser.Position;
+import com.github.javaparser.Range;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.BinaryExpr;
 
@@ -11,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
+
 
 import static JavaExtractor.Common.SearchUtils.containsOffByOne;
 
@@ -39,7 +43,7 @@ public class MethodMutator {
         }
 
         if  (extractedMethods.size() != 0) {
-            extractedMethods.add(new ExtractedMethod(method, mutatedNodes.toString(), App.noBugString));
+            extractedMethods.add(new ExtractedMethod(method, mutatedNodes.toString(), "", App.noBugString));
         }
 
 //        printCandidatesNotConsidered(method, allMutationCandidates);
@@ -48,12 +52,12 @@ public class MethodMutator {
     }
     
     private ExtractedMethod mutateMethod(MethodDeclaration method, List<BinaryExpr> mutationCandidates, String containingNode) {
-
         int mutationIndex = rand.nextInt(mutationCandidates.size());
-        String operator = mutateExpression(mutationCandidates.get(mutationIndex));
+        String[] operator_range = mutateExpression(mutationCandidates.get(mutationIndex)).split("#");
+        String operator = operator_range[0];
+        String range = operator_range[1];
 
-
-        return new ExtractedMethod(method, operator, containingNode);
+        return new ExtractedMethod(method, operator, range, containingNode);
     }
 
     private String mutateExpression(BinaryExpr expression) {
@@ -62,7 +66,16 @@ public class MethodMutator {
         else if (operator.equals(BinaryExpr.Operator.greaterEquals)) expression.setOperator(BinaryExpr.Operator.greater);
         else if (operator.equals(BinaryExpr.Operator.lessEquals)) expression.setOperator(BinaryExpr.Operator.less);
         else if (operator.equals(BinaryExpr.Operator.less)) expression.setOperator(BinaryExpr.Operator.lessEquals);
-        return operator.name();
+        Range range = expression.getRange();
+        int column = range.end.column;
+        if (operator.equals(BinaryExpr.Operator.greater) || operator.equals(BinaryExpr.Operator.less)) {
+            column += 1;
+        } else if (operator.equals(BinaryExpr.Operator.greaterEquals) || operator.equals(BinaryExpr.Operator.lessEquals)) {
+            column -= 1;
+        }
+        String range_s = String.format("(line %d,col %d)-(line %d,col %d)", range.begin.line, range.begin.column, range.end.line, column);
+        
+        return operator.name() + "#" + range_s;
     }
 
     private void printCandidatesNotConsidered(MethodDeclaration method, List<BinaryExpr> candidatesNotConsidered) {

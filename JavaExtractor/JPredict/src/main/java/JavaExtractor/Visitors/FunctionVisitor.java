@@ -22,7 +22,7 @@ public class FunctionVisitor extends VoidVisitorAdapter<Object> {
 		super.visit(node, arg);
 	}
 
-	private void visitMethod(MethodDeclaration node, Object obj) {
+	private void visitMethod(MethodDeclaration node, Object range) {
 		LeavesCollectorVisitor leavesCollectorVisitor = new LeavesCollectorVisitor();
 		leavesCollectorVisitor.visitDepthFirst(node);
 		ArrayList<Node> leaves = leavesCollectorVisitor.getLeaves();
@@ -35,7 +35,7 @@ public class FunctionVisitor extends VoidVisitorAdapter<Object> {
 		}
 
 		if (node.getBody() != null) {
-			m_Methods.add(new MethodContent(leaves, splitName, getMethodLength(node.getBody().toString())));
+			m_Methods.add(new MethodContent(leaves, splitName,  (String)range, getMethodLength(node.getBody().toString())));
 		}
 	}
 

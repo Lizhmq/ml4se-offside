@@ -21,6 +21,8 @@ public final class Common {
 	public static final String UTF8 = "UTF-8";
 	public static final String EvaluateTempDir = "EvalTemp";
 
+	public static final Boolean Mutated = false;
+
 	public static final String FieldAccessExpr = "FieldAccessExpr";
 	public static final String ClassOrInterfaceType = "ClassOrInterfaceType";
 	public static final String MethodDeclaration = "MethodDeclaration";

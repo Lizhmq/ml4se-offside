@@ -1,0 +1,24 @@
+Input Categories
+Name: NoBug count: 9
+Name: FOR count: 3
+Name: WHILE count: 0
+Name: TERNARY count: 0
+Name: IF count: 6
+Name: RETURN count: 0
+Name: METHOD count: 0
+Name: DO count: 0
+Name: ASSIGN count: 0
+Name: ASSERT count: 0
+Name: VARIABLEDECLARATOR count: 2
+Name: OBJECTCREATION count: 0
+Name: EXPRESSION count: 0
+Name: FOREACH count: 0
+Name: MEMBERVALUEPAIR count: 0
+Name: SINGLEMEMBERANNOTATION count: 0
+Name: SWITCHENTERY count: 0
+Name: ARRAYACCESS count: 0
+Operator Types
+Name: greater count: 3
+Name: greaterEquals count: 1
+Name: less count: 5
+Name: lessEquals count: 2

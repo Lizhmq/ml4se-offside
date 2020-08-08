@@ -5,14 +5,18 @@ import com.github.javaparser.ParseProblemException;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
 
+import JavaExtractor.FeatureExtractor;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 public class MethodExtractor {
 
     public MethodExtractor() {}
 
-    public List<MethodDeclaration> extractMethodsFromCode(String code) {
+    private CompilationUnit parseCode(String code) {
         final String classPrefix = "public class Test {";
         final String classSuffix = "}";
         final String methodPrefix = "SomeUnknownReturnType f() {";
@@ -34,7 +38,22 @@ public class MethodExtractor {
                 parsedClass = JavaParser.parse(content);
             }
         }
-        return extractMethodsFromClass(parsedClass);
+        return parsedClass;
+    }
+
+    public List<MethodDeclaration> extractMethodsFromCode(String code) {
+        List<MethodDeclaration> methodDeclarations = new ArrayList<>();
+
+        CompilationUnit compilationUnit = parseCode(code);
+        List<MethodDeclaration> extractedMethods = extractMethodsFromClass(compilationUnit);
+
+        // split class methods to class with only one method
+        for (MethodDeclaration method: extractedMethods) {
+            CompilationUnit unit = parseCode(method.toString());
+            methodDeclarations.addAll(extractMethodsFromClass(unit));
+        }
+
+        return methodDeclarations;
     }
 
     private List<MethodDeclaration> extractMethodsFromClass(CompilationUnit parsedClass) {
